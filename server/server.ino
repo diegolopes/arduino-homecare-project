@@ -6,8 +6,8 @@
 byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
 };
-IPAddress ip(169,254,125,171);
-IPAddress subnet(255, 255, 255, 0); 
+IPAddress ip(169,254,45,198);
+IPAddress subnet(255, 255, 0, 0); 
 IPAddress gateway(192,168,42,129);
 EthernetServer server(80);
 
@@ -21,7 +21,7 @@ void setup() {
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
-  Serial.println("Ethernet WebServer Example");
+  Serial.println("HomeCare Project - Iniciando...");
 
   // Iniciar a conexão com o Ethernet Shield e o server
   Ethernet.begin(mac, ip);

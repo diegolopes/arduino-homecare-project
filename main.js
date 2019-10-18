@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    //Estética
+    $('body').css({"fontFamily":"Source Code Pro"});
+
+    //Variáveis onde serão armazenados os valores do gráfico
     let data = [];
     let currentData;
 
