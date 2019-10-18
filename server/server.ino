@@ -6,8 +6,9 @@
 byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
 };
-IPAddress ip(169, 254, 45, 198);
-IPAddress subnet(255, 255, 0, 0); 
+IPAddress ip(169,254,125,171);
+IPAddress subnet(255, 255, 255, 0); 
+IPAddress gateway(192,168,42,129);
 EthernetServer server(80);
 
 long randNumber;
@@ -22,7 +23,7 @@ void setup() {
   }
   Serial.println("Ethernet WebServer Example");
 
-  // start the Ethernet connection and the server:
+  // Iniciar a conexão com o Ethernet Shield e o server
   Ethernet.begin(mac, ip);
 
   randomSeed(analogRead(0));
@@ -38,9 +39,9 @@ void setup() {
     Serial.println("Ethernet cable is not connected.");
   }
 
-  // Iniciar o  servidor!
+  // Iniciar o  server:
   server.begin();
-  Serial.print("server is at ");
+  Serial.print("Ip do server: ");
   Serial.println(Ethernet.localIP());
 }
 
@@ -70,6 +71,7 @@ void loop() {
           client.println("Connection: close"); 
 
 
+          //Aqui é onde o JSON é criado
           client.println();
           client.print("{\"number\":");
           client.print(randNumber);

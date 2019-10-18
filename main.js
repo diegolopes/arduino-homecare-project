@@ -6,9 +6,9 @@ $(document).ready(function () {
     $('#btn').click(function () {
 
         $.post({
-            url: 'http://169.254.125.171',
+            url: 'http://169.254.125.171', // ip do server do arduino
             beforeSend: function () {
-                $('#response').html('Tentando fazer requisição...')
+                $('#response').html('Conectando ao arduino...')
             }
         }).done(function (response) {
             $('#response').html(response.number)
@@ -33,11 +33,14 @@ $(document).ready(function () {
         })
     }
 
+    //Comunicação com o servidor do arquino a cada X milisegundos
     setInterval(requestData, 500);
 
 
 
-    // Gráficos com plotty
+    /*  Gráficos usando a biblioteca:  Plotly.js
+        Código retirado da documentação: https://plot.ly/javascript/streaming/ */
+
     var arrayLength = 20
     var newArray = []
 
@@ -70,7 +73,4 @@ $(document).ready(function () {
 
         if (cnt === 100) clearInterval(interval);
     }, 500);
-
-
-
 })
