@@ -1,12 +1,14 @@
 #include <SPI.h>
 #include <Ethernet.h>
+#include <Thermistor.h>
 
+Thermistor temp(2);
 
 //Configurar a conexão antes de iniciar:
 byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
 };
-IPAddress ip(169,254,45,198);
+IPAddress ip(169,254,125,171);
 IPAddress subnet(255, 255, 0, 0); 
 IPAddress gateway(192,168,42,129);
 EthernetServer server(80);
@@ -47,8 +49,9 @@ void setup() {
 
 
 void loop() {
-
   randNumber = random(300);
+  int temperature = temp.getTemp(); 
+
   
   // atendendo os 'clientes'
   EthernetClient client = server.available();
@@ -73,8 +76,12 @@ void loop() {
 
           //Aqui é onde o JSON é criado
           client.println();
-          client.print("{\"number\":");
+          client.print("{\"randomNumber\":");
           client.print(randNumber);
+          client.print(",\"temperature\":");
+          client.print(temperature) + ",";
+          client.print(",\"bpm\":");
+          client.print("\"sem dados\"") + ",";
           client.print("}");
           break;
         }
