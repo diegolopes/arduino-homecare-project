@@ -4,12 +4,15 @@
   "description": "Projeto Homecare - RC1",
   "main": "main.js",
   "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
     "plotly.js-dist": "^1.50.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "node-server": "node server.js",
+    "php-server": "php -S 127.0.0.1:80"
   },
   "repository": {
     "type": "git",
