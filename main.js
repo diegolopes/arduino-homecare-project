@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
     //Estética da página
-    $('body').css({"fontFamily":"Source Code Pro"});
+    $('body').css({
+        "fontFamily":"Source Code Pro",
+        "textAlign": "center"
+    });
 
     //Variáveis onde serão armazenados os valores do gráfico
     let data = [];
@@ -12,7 +15,7 @@ $(document).ready(function () {
 
     function requestData() {
         $.post({
-            url: 'http://169.254.125.171',
+            url: 'http://10.0.0.104:8000/fake-data.php',
             beforeSend: function () {
                 div.html('Temperatura: Atualizando...')
             }
@@ -42,6 +45,7 @@ $(document).ready(function () {
     Plotly.plot('graph', [{
         y: newArray,
         mode: 'lines',
+        responsive: true,
         line: {
             color: 'red'
         }

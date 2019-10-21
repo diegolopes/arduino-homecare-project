@@ -11,8 +11,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "node-server": "node server.js",
-    "php-server": "php -S 127.0.0.1:80"
+    "node": "node server.js",
+    "php": "php -S 127.0.0.1:80",
+    "php-r": "php -S 0.0.0.0:8000"
   },
   "repository": {
     "type": "git",

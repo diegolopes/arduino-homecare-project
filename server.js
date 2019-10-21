@@ -15,6 +15,5 @@ app.use('/', (req,res) =>{
 })
 
 server.listen(3000, function(){
-  
     console.log('Server node.js rodando em: localhost:3000');
 });
