@@ -5,7 +5,7 @@
 #define USE_ARDUINO_INTERRUPTS true    // Set-up low-level interrupts for most acurate BPM math.
 #include <PulseSensorPlayground.h>     // Includes the PulseSensorPlayground Library.   
 
-//  Variables
+//  Variáveis do PulseSensor
 const int PulseWire = 1;       // PulseSensor PURPLE WIRE connected to ANALOG PIN 0
 const int LED13 = 13;          // The on-board Arduino LED, close to PIN 13.
 int Threshold = 550;           // Determine which Signal to "count as a beat" and which to ignore.
@@ -25,7 +25,7 @@ IPAddress subnet(255, 255, 0, 0);
 IPAddress gateway(192,168,42,129);
 EthernetServer server(80);
 
-long randNumber;
+long randNumber; //Número aleatório para testes
 
 
 void setup() {

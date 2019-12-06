@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-    // Alertas
-    $('#alertaBpm').hide();
-
     //Estética da página
     $('body').css({
         "fontFamily":"Verdana",
@@ -11,6 +8,10 @@ $(document).ready(function () {
         "color": "white",
         "overflow": "hidden"
     });
+
+    // Esconder alerta inicial
+    $('#alertaFebre').hide();
+    $('#alertaBpm').hide();
 
     //Variáveis onde serão armazenados os valores do gráfico de temperatura
     let data = [];
@@ -22,7 +23,7 @@ $(document).ready(function () {
 
     // Div onde irei 'printar' os responses do server
     const div = $('#response');
-    const divBpm = $('#response-bpm');
+    const divBpm = $('.response-bpm');
 
     function requestData() {
         $.post({
@@ -33,10 +34,20 @@ $(document).ready(function () {
         }).done(function (response) {
             div.html(response.temperature)
             divBpm.html(response.bpm)
+
+            // Calcular média das BPMs:
+            var total = 0;
+            for(var i = 0; i < newArray.length; i++) {
+                total += newArray[i];
+            }
+            var mediaTmp = total / newArray.length;
+            $('.mediaTemp').html(mediaTmp);
+            console.log(mediaTmp >= 36 && !isNaN(mediaTmp) )
+            console.log(mediaTmp < 36 && !isNaN(mediaTmp) )
+
             console.log(response);
             data.push(response.temperature); // Array das temperaturas
             currentData = response.temperature // Array das temperaturas
-            console.table(newArray);
             
 
             data_bpm.push(response.bpm); // Array das BPM
@@ -51,21 +62,21 @@ $(document).ready(function () {
             }
 
             // Alertas de temperatura
-            if(response.temperature >= 40){
+            if(mediaTmp >= 38 && !isNaN(mediaTmp)){
                 $('#alertaFebre').show();
             }
-            else if(response.temperature < 40){
-                $('#alertaFebre').show();
+            else if(mediaTmp < 38){
+                $('#alertaFebre').hide();
             }
 
-
-            var total = 0;
-            for(var i = 0; i < newArray.length; i++) {
-                total += newArray[i];
+            // Alertas de BPM
+            if(response.bpm >= 100){
+                $('.alertaBpm').show();
             }
-            var avg = total / newArray.length;
-            console.log("Temp: " + avg);
 
+            else if(response.bpm < 100){
+                $('.alertaBpm').hide();
+            }
 
 
         })

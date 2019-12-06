@@ -1,3 +1,5 @@
+// Script alternativo para criar um server node.js
+
 const express = require('express');
 const path = require('path');
 
