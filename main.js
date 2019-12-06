@@ -1,9 +1,15 @@
 $(document).ready(function () {
 
+    // Alertas
+    $('#alertaBpm').hide();
+
     //Estética da página
     $('body').css({
-        "fontFamily":"Source Code Pro",
-        "textAlign": "center"
+        "fontFamily":"Verdana",
+        "textAlign": "center",
+        "backgroundColor": "black",
+        "color": "white",
+        "overflow": "hidden"
     });
 
     //Variáveis onde serão armazenados os valores do gráfico de temperatura
@@ -16,21 +22,51 @@ $(document).ready(function () {
 
     // Div onde irei 'printar' os responses do server
     const div = $('#response');
+    const divBpm = $('#response-bpm');
 
     function requestData() {
         $.post({
-            url: 'http://10.10.117.23',
+            url: 'http://127.0.0.1:80/fake-data.php',
             beforeSend: function () {
-                div.html('Temperatura: Atualizando...')
+                div.html('...')
             }
         }).done(function (response) {
-            div.html('Temperatura: ' + response.temperature)
+            div.html(response.temperature)
+            divBpm.html(response.bpm)
             console.log(response);
             data.push(response.temperature); // Array das temperaturas
             currentData = response.temperature // Array das temperaturas
+            console.table(newArray);
+            
 
             data_bpm.push(response.bpm); // Array das BPM
             currentData_bpm = response.bpm // Array das BPM
+
+            // Alertas de BPM
+            if(response.bpm > 300){
+                $('#alertaBpm').show();
+            }
+            else if (response.bpm < 300) {
+                $('#alertaBpm').hide();
+            }
+
+            // Alertas de temperatura
+            if(response.temperature >= 40){
+                $('#alertaFebre').show();
+            }
+            else if(response.temperature < 40){
+                $('#alertaFebre').show();
+            }
+
+
+            var total = 0;
+            for(var i = 0; i < newArray.length; i++) {
+                total += newArray[i];
+            }
+            var avg = total / newArray.length;
+            console.log("Temp: " + avg);
+
+
 
         })
     }
@@ -54,6 +90,11 @@ $(document).ready(function () {
         var y = data[i]
         newArray[i] = y
     }
+    var layout = {
+        plot_bgcolor: 'black',
+        paper_bgcolor:'black'
+
+    }
 
     Plotly.plot('graph', [{
         y: newArray,
@@ -62,7 +103,10 @@ $(document).ready(function () {
         line: {
             color: 'red'
         }
-    }]);
+    }],layout);
+
+
+
 
     var cnt = 0;
 
@@ -97,8 +141,8 @@ $(document).ready(function () {
        responsive: true,
        line: {
            color: 'red'
-       }
-   }]);
+       }, 
+   }],layout);
 
    var cnt = 0;
 
