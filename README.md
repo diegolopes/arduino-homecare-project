@@ -7,11 +7,11 @@ Requerimentos:
 - PHP
 
 
-Abra o cmd e rode:
-    npm install
+Abra o cmd e rode:   
+´npm install´
 
-Em seguida:
-    npm run php
+Em seguida:  
+´npm run php´
 
 Abra o navegador e acesse: http://127.0.0.1:80
 
